@@ -1,12 +1,12 @@
 const advisors = [
   {
     id: 1,
-    name: "Dr. Karim Elsharkawy",
+    name: "Dr. Tarek Shafik",
     specialty: "Education Strategy",
     rating: 4.9,
-    email: "karim@xedu.app",
-    bio: "Founder of Xedu, 10+ years mentoring students.",
-    image: "https://i.pravatar.cc/150?img=12",
+    email: "Tarek@xedu.app",
+    bio: "Co-Founder of Xedu, 10+ years mentoring students.",
+    imageUrl: "http://192.168.1.100:3000/images/tarek_shafik.png", // Update this
     sessions: [
       { id: 1, date: "2025-07-01", studentName: "Ali Mohamed" },
       { id: 2, date: "2025-07-02", studentName: "Sarah Ahmed" },
@@ -19,7 +19,7 @@ const advisors = [
     rating: 4.8,
     email: "fatma@xedu.app",
     bio: "MIT grad, helps students apply to US/UK CS programs.",
-    image: "https://i.pravatar.cc/150?img=24",
+    imageUrl: "https://i.pravatar.cc/150?img=24",
     sessions: [],
   },
   {
@@ -29,7 +29,7 @@ const advisors = [
     rating: 4.6,
     email: "youssef@xedu.app",
     bio: "Helps Egyptian students get into med school in the UK.",
-    image: "https://i.pravatar.cc/150?img=33",
+    imageUrl: "https://i.pravatar.cc/150?img=33",
     sessions: [],
   },
 ];
