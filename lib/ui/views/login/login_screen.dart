@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:profile_card/routes/app_routes.dart';
 import 'package:provider/provider.dart';
 
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends State<LoginScreen> with AppRoutes {
   // Form and state management
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
@@ -30,7 +31,18 @@ class _LoginScreenState extends State<LoginScreen> {
   // ========== UI BUILD ==========
   @override
   Widget build(BuildContext context) {
-    final authViewModel = Provider.of<AuthViewModel>(context);
+    /* 
+    This is how you access a provider from anywhere in the widget tree,
+    you often don't use this directly 
+     */
+    // final viewModel = Provider.of<AuthViewModel>(context);
+
+    /* context.watch<T>()
+    ✅ Listens for changes to the provider and rebuilds the widget when notifyListeners() is called.
+    📦 Use this inside build() method or inside any widget that depends on updated
+    🧠 Bonus Tip: Avoid calling watch in initState or async methods — it only works inside build.
+     */
+    final viewModel = context.watch<AuthViewModel>();
 
     return Scaffold(
       appBar: AppBar(title: const Text('Login')),
@@ -41,9 +53,9 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             children: [
               // Error message
-              if (authViewModel.errorMessage != null)
+              if (viewModel.errorMessage != null)
                 Text(
-                  authViewModel.errorMessage!,
+                  viewModel.errorMessage!,
                   style: TextStyle(color: Colors.red),
                 ),
 
@@ -54,17 +66,12 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 30),
 
               LoginButton(
-                isLoading: authViewModel.isLoading,
+                isLoading: viewModel.isLoading,
                 onPressed: () => _submitForm(context),
               ),
 
               // Sign up option
-              TextButton(
-                onPressed: () {
-                  // Navigate to signup screen
-                },
-                child: const Text('Don\'t have an account? Sign up'),
-              ),
+              signupButton(context, text: "Don't have an account? Sign up"),
             ],
           ),
         ),
@@ -74,18 +81,17 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future<void> _submitForm(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
-      final success = await Provider.of<AuthViewModel>(
-        context,
-        listen: false,
-      ).login(_emailController.text.trim(), _passwordController.text);
+      /** context.read<T>()
+    ✅ Used when you want to call methods on the provider without listening for changes.
+    🚫 Does not rebuild your widget when the provider notifies listeners.
+     */
+      final viewModel = context.read<AuthViewModel>();
+      final success = await viewModel.login(
+        _emailController.text.trim(),
+        _passwordController.text,
+      );
 
-      if (success && mounted) {
-        Navigator.of(context).pushReplacementNamed('/profile');
-      }
+      if (success && mounted) navigateTo(context, AppRoutes.profile);
     }
-  }
-
-  void _navigateToSignup(BuildContext context) {
-    // Implement signup navigation
   }
 }

@@ -1,13 +1,14 @@
 import "package:flutter/material.dart";
+import "package:profile_card/routes/app_routes.dart";
 import "package:profile_card/ui/view_model/auth_view_model.dart";
 import "package:provider/provider.dart";
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatelessWidget with AppRoutes {
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<AuthViewModel>(context).currentUser;
+    final user = context.watch<AuthViewModel>().currentUser;
 
     if (user == null) {
       return const Scaffold(
@@ -73,7 +74,7 @@ class ProfileScreen extends StatelessWidget {
                 children: [
                   Icon(Icons.person, color: Colors.purple[400]),
                   const SizedBox(width: 8),
-                  Text(user.job, style: TextStyle(color: Colors.grey[600])),
+                  Text(user.job!, style: TextStyle(color: Colors.grey[600])),
                 ],
               ),
               const SizedBox(height: 16),
@@ -97,16 +98,16 @@ class ProfileScreen extends StatelessWidget {
   }
 
   void _logout(BuildContext context) {
-    Provider.of<AuthViewModel>(context, listen: false).logout();
-    Navigator.of(context).pushReplacementNamed('/');
+    context.read<AuthViewModel>().logout();
+    navigateTo(context, AppRoutes.home);
   }
 }
 
 class _ProfileInfoRow extends StatelessWidget {
   final Widget icon;
-  final String text;
+  final String? text;
 
-  const _ProfileInfoRow({required this.icon, required this.text});
+  const _ProfileInfoRow({required this.icon, this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -114,7 +115,7 @@ class _ProfileInfoRow extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
         mainAxisSize: MainAxisSize.min,
-        children: [icon, const SizedBox(width: 12), Text(text)],
+        children: [icon, const SizedBox(width: 12), Text(text!)],
       ),
     );
   }
