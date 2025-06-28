@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:profile_card/routes/app_routes.dart';
 import 'package:profile_card/ui/view_model/auth_view_model.dart';
-import 'package:profile_card/ui/views/login/login_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -26,7 +25,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Profile App',
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: const LoginScreen(),
+      // home: const LoginScreen(),
+      initialRoute: AppRoutes.login, // 👈 optional
       routes: AppRoutes.routes,
     );
   }

@@ -5,4 +5,6 @@ class ApiBase {
 class EndPoint {
   static final loginApi = "${ApiBase.apiBaseUrs}/api/login";
   static final signupApi = "${ApiBase.apiBaseUrs}/api/signup";
+
+  static final String getAllAdvisors = '${ApiBase.apiBaseUrs}/api/advisors';
 }

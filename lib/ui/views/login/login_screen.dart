@@ -91,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> with AppRoutes {
         _passwordController.text,
       );
 
-      if (success && mounted) navigateTo(context, AppRoutes.profile);
+      if (success && mounted) navigateTo(context, AppRoutes.home);
     }
   }
 }

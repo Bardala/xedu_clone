@@ -1,5 +1,4 @@
 // lib/data/repositories/auth_repository.dart
-import 'dart:convert';
 import 'package:profile_card/data/services/auth_local_service.dart';
 import 'package:profile_card/data/services/auth_service.dart';
 import 'package:profile_card/models/login_res.dart';
@@ -13,30 +12,16 @@ class AuthRepo {
   Future<Result<LoginRes>> signup(User user) async {
     try {
       final res = await _remote.signup(user);
-
-      if (res.statusCode == 200 || res.statusCode == 201) {
-        final data = jsonDecode(res.body);
-        return Result.ok(LoginRes.fromJson(data));
-      } else {
-        final errorData = jsonDecode(res.body);
-        return Result.error(errorData['error']);
-      }
+      return Result.ok(res);
     } catch (e) {
-      return Result.error("Login error: $e");
+      return Result.error("Signup error: $e");
     }
   }
 
   Future<Result<LoginRes>> login(String email, String password) async {
     try {
       final res = await _remote.login(email, password);
-
-      if (res.statusCode == 200) {
-        final data = jsonDecode(res.body);
-        return Result.ok(LoginRes.fromJson(data));
-      } else {
-        final errorData = jsonDecode(res.body);
-        return Result.error(errorData['error'] ?? "Login failed");
-      }
+      return Result.ok(res);
     } catch (e) {
       return Result.error("Login error: $e");
     }
@@ -45,4 +30,6 @@ class AuthRepo {
   Future<void> saveToken(String token) => _local.saveToken(token);
 
   Future<void> logout() => _local.clearToken();
+
+  bool isSuccess(int code) => code >= 200 && code < 300;
 }
