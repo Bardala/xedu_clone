@@ -34,6 +34,7 @@ It leverages the provider package for state management, making ViewModels observ
 
 The project is modularized for clarity and scalability:
 
+```
 lib/
 │
 ├── main.dart # Entry point
@@ -81,6 +82,7 @@ lib/
 │
 └── utils/
 └── result.dart # Generic Result<T> class
+```
 
 ---
 
