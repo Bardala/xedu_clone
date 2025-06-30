@@ -21,7 +21,6 @@ class AdvisorsSection extends StatelessWidget {
           }
 
           final advisors = vm.advisors ?? [];
-          print("advisors ${advisors[0].imageUrl}");
 
           return SizedBox(
             height: 300,

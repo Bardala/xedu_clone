@@ -1,3 +1,18 @@
+## 🧭 Table of Contents
+
+- [Xedu Advisor Platform (Flutter MVVM)](#xedu-advisor-platform-flutter-mvvm)
+- [✨ Key Features](#-key-features)
+- [📐 Architecture Overview](#-architecture-overview)
+- [📁 Folder Structure](#-folder-structure)
+- [🧠 How MVVM Works in This App](#-how-mvvm-works-in-this-app)
+- [🧪 Demo API (Mock)](#-demo-api-mock)
+- [🚀 Getting Started](#-getting-started)
+- [📱 Screens Included](#-screens-included)
+- [📦 Core Dependencies](#-core-dependencies)
+- [📸 Screenshots](#-screenshots)
+
+---
+
 # Xedu Advisor Platform (Flutter MVVM)
 
 A modern Flutter application that connects students with expert advisors around the world. Built using clean architecture principles and the MVVM design pattern, this app focuses on providing a structured, scalable, and visually engaging learning experience.
@@ -125,8 +140,8 @@ You can test it using curl or Postman (see CLI commands in development setup).
 1. Clone the repo:
 
 ```bash
-git clone https://github.com/your-name/xedu-flutter-clone.git
-cd xedu-flutter-clone
+git clone https://github.com/bardala/xedu_clone.git
+cd xedu_clone
 ```
 
 2. Install dependencies:
@@ -144,8 +159,9 @@ flutter run
 4. Run the mock server (optional if you're testing API):
 
 ```bash
-cd backend/
-node index.js
+cd flutter_auth_server/
+npm i
+npm start
 ```
 
 ---
